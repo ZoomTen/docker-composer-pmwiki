@@ -21,6 +21,6 @@ ENV PMWIKI_VERSION 2.2.80
 
 # VOLUME ["/var/www/html/wiki.d/","/var/www/html/local/","/var/www/html/cookbook/", "/var/www/html/pub", "/var/www/html/uploads"]
 
-COPY nginx-site.conf /env/nginx/sites-available/default
+COPY nginx-site.conf /etc/nginx/conf.d/default.conf
 
 VOLUME ["/var/www/html"]
