@@ -22,5 +22,8 @@ ENV PMWIKI_VERSION 2.2.80
 # VOLUME ["/var/www/html/wiki.d/","/var/www/html/local/","/var/www/html/cookbook/", "/var/www/html/pub", "/var/www/html/uploads"]
 
 COPY nginx-site.conf /etc/nginx/conf.d/default.conf
+RUN bash -c 'echo "daemon off;" >> /etc/nginx/nginx.conf'
+
+CMD /etc/init.d/php-fpm start && /usr/sbin/nginx
 
 VOLUME ["/var/www/html"]
