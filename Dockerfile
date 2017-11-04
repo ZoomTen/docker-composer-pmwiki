@@ -22,11 +22,12 @@ ENV PMWIKI_VERSION 2.2.80
 # VOLUME ["/var/www/html/wiki.d/","/var/www/html/local/","/var/www/html/cookbook/", "/var/www/html/pub", "/var/www/html/uploads"]
 
 COPY nginx-site.conf /etc/nginx/conf.d/default.conf
-RUN bash -c 'echo "daemon off;" >> /etc/nginx/nginx.conf'
+RUN bash -c 'echo "daemon off;" >> /etc/nginx/nginx.conf' && \
+    sed -ie 's/user  nginx;/user  www-data;/' /etc/nginx/nginx.conf
 
 CMD /etc/init.d/php7.0-fpm start && /usr/sbin/nginx
 
 VOLUME ["/var/www/html"]
 
 # Command line:
-# docker run -it -v $1:/var/www/html:rw -p 127.0.0.1:$2:80 edbrannin/docker-pmwiki
+# docker run -d -v $1:/var/www/html:rw -p 127.0.0.1:$2:80 edbrannin/docker-pmwiki
