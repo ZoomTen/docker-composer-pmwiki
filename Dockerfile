@@ -16,10 +16,7 @@ RUN bash -c 'echo "daemon off;" >> /etc/nginx/nginx.conf' && \
 
 CMD /etc/init.d/php7.0-fpm start && /usr/sbin/nginx
 
-VOLUME [
-  "/var/www/html",
-  "/var/www/logs",
-  ]
+VOLUME [ "/var/www/html", "/var/www/logs" ]
 
 # Command line:
 # docker run -d -v $1:/var/www/html:rw -p 127.0.0.1:$2:80 edbrannin/docker-pmwiki
