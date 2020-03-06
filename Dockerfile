@@ -1,7 +1,11 @@
 FROM nginx:stable
-
 RUN apt-get update && apt-get install -y \
-      wget php php-mcrypt php-mysql php-fpm
+      wget php-dev php-mysql php-fpm \
+      gcc make autoconf libc-dev pkg-config \
+      libmcrypt-dev
+
+RUN pecl install mcrypt-1.0.2
+      
 
 
 ENV PMWIKI_VERSION 2.2.80
@@ -25,7 +29,7 @@ COPY nginx-site.conf /etc/nginx/conf.d/default.conf
 RUN bash -c 'echo "daemon off;" >> /etc/nginx/nginx.conf' && \
     sed -ie 's/user  nginx;/user  www-data;/' /etc/nginx/nginx.conf
 
-CMD /etc/init.d/php7.0-fpm start && /usr/sbin/nginx
+CMD /etc/init.d/php7.3-fpm start && /usr/sbin/nginx
 
 VOLUME ["/var/www/html"]
 
