@@ -1,0 +1,12 @@
+version: '3.6'
+
+services:
+    web:
+        build: .
+        ports:
+            - "8080:80"
+        volumes:
+            - ./pmwiki-2.2.126:/var/www/html
+            - persistence:/var/www/html/wiki.d
+volumes:
+    persistence:
